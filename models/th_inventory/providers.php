@@ -42,6 +42,36 @@ if($_POST['METHOD']=='ADD'){
     echo json_encode($result);     
     exit();
 }
+if($_POST['METHOD']=='PUT'){
+    unset($_POST['METHOD']);
+    $name=$_POST['name'];
+    $ruc=$_POST['ruc'];
+    $saler=$_POST['saler'];
+    if($saler==null){
+        $saler = 'S/I';
+    }
+    $phone=$_POST['phone'];
+    if($phone==null){
+        $saler = 'S/I';
+    }
+    $email=$_POST['email'];
+    if($email==null){
+        $email = 'S/I';
+    }
+    $address=$_POST['address'];
+    if($address==null){
+        $address = 'S/I';
+    }
+    $country=$_POST['country'];
+    if($country==null){
+        $country = 'S/I';
+    }
+    $query="UPDATE th_providers SET pr_address = '$address', pr_phone = '$phone',
+      pr_ruc = '$ruc', pr_saler = '$saler', pr_country = '$country', pr_email = '$email' WHERE pr_name = '$name';";
+    $result=methodPut($query);     
+    echo json_encode($result);     
+    exit();
+}
 if($_POST['METHOD']=='DELETE'){
     unset($_POST['METHOD']);
     $id=$_POST['id'];
